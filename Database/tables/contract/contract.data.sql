@@ -1,0 +1,40 @@
+--use master;
+--use banking_system;
+
+--merge into [contract] t
+--using (
+--	values ()
+--) as s (
+--    [user_id],
+--    current_account_id,
+--    percent_account_id,
+--    program_id,
+--    number,
+--    amount
+--)
+--on t.[user_id] = s.[user_id]
+--    and t.program_id = s.program_id
+--when matched then
+--    update set
+--        current_account_id = s.current_account_id,
+--        percent_account_id = s.percent_account_id,
+--        number = s.number,
+--        amount = s.amount
+--when not matched then
+--	insert (
+--		[user_id],
+--        current_account_id,
+--        percent_account_id,
+--        program_id,
+--        number,
+--        amount
+--	)
+--	values (
+--		s.[user_id],
+--        s.current_account_id,
+--        s.percent_account_id,
+--        s.program_id,
+--        s.number,
+--        s.amount
+--	);
+		

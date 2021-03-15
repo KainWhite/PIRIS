@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <LangVersion>latest</LangVersion>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.3" />
+    <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BankingSystem.Businnes\BankingSystem.Business.csproj" />
+    <ProjectReference Include="..\BankingSystem.Domain\BankingSystem.Domain.csproj" />
+    <ProjectReference Include="..\BankingSystem.EntityFramework\BankingSystem.EntityFramework.csproj" />
+  </ItemGroup>
+
+</Project>

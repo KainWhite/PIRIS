@@ -1,0 +1,27 @@
+create table [user] (
+	id int identity(1, 1),
+    gender_id int not null,
+    residence_city_id int not null,
+    marital_status_id int not null,
+	nationality_id int not null,
+	disability_id int null,
+	first_name nvarchar(100) not null,
+	second_name nvarchar(100) not null,
+	third_name nvarchar(100) not null,
+	date_of_birth datetime2 not null,
+	residence_address nvarchar(100) not null,
+	home_phone_number nvarchar(100) not null,
+	mobile_phone_number nvarchar(100) not null,
+	email nvarchar(100) not null,
+	registration_address nvarchar(100) not null,
+	is_retiree bit not null,
+	monthly_income money null,
+	primary key (id),
+    constraint FK_user_gender foreign key (gender_id) references gender(id),
+	constraint FK_user_residence_city foreign key (residence_city_id) references city(id),
+	constraint FK_user_marital_status foreign key (marital_status_id) references marital_status(id),
+	constraint FK_user_nationality foreign key (nationality_id) references nationality(id),
+	constraint FK_user_disability foreign key (disability_id) references disability(id),
+);
+
+print 'Table ''user'' was created.';

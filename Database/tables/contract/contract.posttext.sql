@@ -1,0 +1,2 @@
+print '---------- contract ----------';
+print '';
