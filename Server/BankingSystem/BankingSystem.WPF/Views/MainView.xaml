@@ -8,12 +8,13 @@
         xmlns:navigators="clr-namespace:BankingSystem.WPF.State.Navigators"
         xmlns:enums="clr-namespace:BankingSystem.Core.Enums;assembly=BankingSystem.Core"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="MainView" Height="900" Width="1200">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition/>
     </Grid.RowDefinitions>
+    <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}"/>
     <ContentControl Grid.Row="1"
                     Content="{Binding Navigator.CurrentViewModel}"></ContentControl>
   </Grid>

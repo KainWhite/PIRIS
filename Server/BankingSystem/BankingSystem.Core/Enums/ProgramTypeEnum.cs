@@ -4,12 +4,9 @@ using System.Text;
 
 namespace BankingSystem.Core.Enums
 {
-    public enum ViewType
+    public enum ProgramTypeEnum
     {
-        UserList,
-        User,
-        AccountList,
-        Contract,
-        Account,
+        Deposit,
+        Credit,
     }
 }

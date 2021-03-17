@@ -5,12 +5,32 @@
              xmlns:views="clr-namespace:BankingSystem.WPF.Views">
   <Application.Resources>
     <ResourceDictionary>
+
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Styles/Common.xaml"/>
+        <ResourceDictionary Source="/Styles/NavigatinBarStyles.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+
       <DataTemplate DataType="{x:Type viewModels:UserListViewModel}">
         <views:UserListView/>
       </DataTemplate>
+
       <DataTemplate DataType="{x:Type viewModels:UserViewModel}">
         <views:UserView/>
       </DataTemplate>
+
+      <DataTemplate DataType="{x:Type viewModels:AccountListViewModel}">
+        <views:AccountListView/>
+      </DataTemplate>
+
+      <DataTemplate DataType="{x:Type viewModels:ContractViewModel}">
+        <views:ContractView/>
+      </DataTemplate>
+
+      <DataTemplate DataType="{x:Type viewModels:AccountViewModel}">
+        <views:AccountView/>
+      </DataTemplate>
+
     </ResourceDictionary>
   </Application.Resources>
 </Application>

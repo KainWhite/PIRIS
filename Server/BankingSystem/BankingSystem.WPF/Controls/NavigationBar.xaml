@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="BankingSystem.WPF.Controls.NavigationBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BankingSystem.WPF.Controls"
+             xmlns:enums="clr-namespace:BankingSystem.Core.Enums;assembly=BankingSystem.Core"
+             xmlns:converters="clr-namespace:BankingSystem.WPF.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+  <Grid>
+    <Grid.Resources>
+      <Style TargetType="RadioButton" BasedOn="{StaticResource NavButton}"></Style>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock Grid.Row="0" Padding="10" FontSize="28" Text="Banking System" Background="{StaticResource GreenBrush}"/>
+    <Grid Grid.Row="1" RenderOptions.EdgeMode="Aliased" Background="{StaticResource DarkGreenBrush}">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <RadioButton Grid.Column="0"
+                   Content="User list"
+                   Command="{Binding UpdateCurrentViewModelCommand}">
+        <RadioButton.CommandParameter>
+          <MultiBinding Converter="{converters:UpdateCurrentViewModelCommandParameterConverter}">
+            <Binding Source="{x:Static enums:ViewType.UserList}" Mode="OneWay"/>
+            <Binding Path=""/>
+          </MultiBinding>
+        </RadioButton.CommandParameter>
+      </RadioButton>
+      <RadioButton Grid.Column="1"
+                   Content="Account list"
+                   Command="{Binding UpdateCurrentViewModelCommand}">
+        <RadioButton.CommandParameter>
+          <MultiBinding Converter="{converters:UpdateCurrentViewModelCommandParameterConverter}">
+            <Binding Source="{x:Static enums:ViewType.AccountList}" Mode="OneWay"/>
+            <Binding Path=""/>
+          </MultiBinding>
+        </RadioButton.CommandParameter>
+      </RadioButton>
+      <!--<Button Grid.Column="2" Content="Lol" Command="{Binding UpdateCurrentViewModelCommand}">
+        <Button.CommandParameter>
+          <MultiBinding Converter="{converters:UpdateCurrentViewModelCommandParameterConverter}">
+            <Binding Source="{x:Static enums:ViewType.UserList}" Mode="OneWay"/>
+            <Binding Path=""/>
+          </MultiBinding>
+        </Button.CommandParameter>
+      </Button>-->
+    </Grid>
+  </Grid>
+</UserControl>

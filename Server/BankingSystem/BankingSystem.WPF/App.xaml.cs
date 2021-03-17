@@ -39,6 +39,11 @@ namespace BankingSystem.WPF
             services.AddSingleton<NationalityRepository>();
             services.AddSingleton<PassportRepository>();
             services.AddSingleton<UserRepository>();
+            services.AddSingleton<AccountRepository>();
+            services.AddSingleton<AccountTypeRepository>();
+            services.AddSingleton<ContractRepository>();
+            services.AddSingleton<ProgramRepository>();
+            services.AddSingleton<DateChangeRepository>();
 
             services.AddSingleton<IViewModelAbstractFactory, ViewModelAbstractFactory>();
 

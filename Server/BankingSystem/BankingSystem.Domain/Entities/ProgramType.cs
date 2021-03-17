@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using BankingSystem.Core.Enums;
 
 namespace BankingSystem.Domain.Entities
 {
@@ -11,7 +12,7 @@ namespace BankingSystem.Domain.Entities
             Programs = new List<Program>();
         }
 
-        public string Name { get; set; }
+        public ProgramTypeEnum Name { get; set; }
 
         public ICollection<Program> Programs { get; set; }
     }

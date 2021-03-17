@@ -1,6 +1,9 @@
 ﻿using BankingSystem.Core;
+using BankingSystem.Core.Enums;
+using BankingSystem.Core.Extensions;
 using BankingSystem.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BankingSystem.EntityFramework
 {
@@ -11,6 +14,7 @@ namespace BankingSystem.EntityFramework
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<DateChange> DateChanges { get; set; }
         public virtual DbSet<Disability> Disabilities { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<MaritalStatus> MaritalStatuses { get; set; }
@@ -28,9 +32,9 @@ namespace BankingSystem.EntityFramework
         {
             base.OnModelCreating(builder);
 
-            var x = builder.Model.GetEntityTypes();
+            var entities = builder.Model.GetEntityTypes();
 
-            foreach (var entity in x)
+            foreach (var entity in entities)
             {
                 // Replace table names
                 entity.SetTableName(entity.GetTableName().ToSnakeCase());
@@ -42,8 +46,10 @@ namespace BankingSystem.EntityFramework
                 }
             }
 
-            //builder.Entity<Account>()
-            //    .Property(x => x.Contracts)
+            builder.Entity<AccountType>().Property(x => x.Name).HasConversion(new ValueConverter<AccountTypeEnum,string>(
+                v => v.GetDescription(),
+                v => v.GetEnumValue<AccountTypeEnum>()));
+            builder.Entity<ProgramType>().Property(x => x.Name).HasConversion<string>();
         }
     }
 }

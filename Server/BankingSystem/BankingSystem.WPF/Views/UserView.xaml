@@ -39,6 +39,7 @@
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
+
     <Button Grid.Row="0" Command="{Binding GoBackCommand}">Go back</Button>
     <ScrollViewer Grid.Row="1">
       <StackPanel  Orientation="Vertical" >

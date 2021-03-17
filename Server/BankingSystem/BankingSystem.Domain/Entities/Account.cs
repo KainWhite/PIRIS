@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using BankingSystem.Core.Enums;
 using BankingSystem.Core.Extensions;
 
 namespace BankingSystem.Domain.Entities
@@ -10,48 +12,74 @@ namespace BankingSystem.Domain.Entities
     {
         public Account()
         {
-            _currentAccountContracts = new List<Contract>();
-            _percentAccountContracts = new List<Contract>();
-            Contracts = new List<Contract>();
+            CurrentAccountContracts = new List<Contract>();
+            PercentAccountContracts = new List<Contract>();
         }
 
-        public decimal Debit { get; set; }
-        public decimal Credit { get; set; }
+        public decimal Debit { get; set; } = 0;
+        public decimal Credit { get; set; } = 0;
         public string Number { get; set; }
         public int AccountTypeId { get; set; }
 
         public AccountType AccountType { get; set; }
 
         [InverseProperty("CurrentAccount")]
-        public ICollection<Contract> CurrentAccountContracts
-        {
-            get => _currentAccountContracts;
-            set
-            {
-                _currentAccountContracts = value;
-                var contracts = new HashSet<Contract>(PercentAccountContracts);
-                contracts.AddRange(_currentAccountContracts);
-                Contracts = contracts.ToList();
-            }
-        }
+        public List<Contract> CurrentAccountContracts { get; set; }
 
         [InverseProperty("PercentAccount")]
-        public ICollection<Contract> PercentAccountContracts
+        public List<Contract> PercentAccountContracts { get; set; }
+
+        public decimal Debt { get; set; } = 0;
+        public decimal DebtPercents { get; set; } = 0;
+
+        [NotMapped]
+        public List<Contract> Contracts
         {
-            get => _percentAccountContracts;
-            set
+            get
             {
-                _percentAccountContracts = value;
-                var contracts = new HashSet<Contract>(CurrentAccountContracts);
-                contracts.AddRange(_percentAccountContracts);
-                Contracts = contracts.ToList();
+                if (_contracts == null)
+                {
+                    var contracts = new HashSet<Contract>(CurrentAccountContracts);
+                    contracts.AddRange(PercentAccountContracts);
+                    _contracts = contracts.ToList();
+                }
+
+                return _contracts;
             }
         }
 
         [NotMapped]
-        public ICollection<Contract> Contracts { get; set; }
+        public DateTime ContractConclusionDate { get; set; }
+        
+        [NotMapped]
+        public DateTime ContractEndDate { get; set; }
 
-        private ICollection<Contract> _currentAccountContracts;
-        private ICollection<Contract> _percentAccountContracts;
+
+        private List<Contract> _contracts;
+
+        public static string CreateAccountNumber(AccountTypeEnum accountType, int contractNumber)
+        {
+            long result = contractNumber * 10 % 1_000_000_000;
+            switch (accountType)
+            {
+                case AccountTypeEnum.Cashier:
+                    result += 1010_000_000_000; 
+                    break;
+                case AccountTypeEnum.BankDevelopmentFund:
+                    result += 7327_000_000_000;
+                    break;
+                case AccountTypeEnum.CurrentAccount:
+                    result += 3014_000_000_000;
+                    break;
+                case AccountTypeEnum.PercentAccount:
+                    result += 2400_000_000_000;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(accountType), accountType, null);
+            }
+
+            result += result.GetDigitSum() % 10;
+            return result.ToString();
+        }
     }
 }

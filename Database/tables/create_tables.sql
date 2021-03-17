@@ -1,5 +1,9 @@
 -- MIND THE ORDER, IT IS IMPORTANT
 
+:r .\tables\date_change\date_change.sql
+
+----------------------------------------------
+
 :r .\tables\city\city.sql
 :r .\tables\disability\disability.sql
 :r .\tables\marital_status\marital_status.sql

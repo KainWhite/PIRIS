@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using BankingSystem.Core.Enums;
 
 namespace BankingSystem.Domain.Entities
 {
@@ -11,7 +12,12 @@ namespace BankingSystem.Domain.Entities
             Accounts = new List<Account>();
         }
 
-        public string Name { get; set; }
+        public AccountType(AccountTypeEnum accountType) : this()
+        {
+            Name = accountType;
+        }
+
+        public AccountTypeEnum Name { get; set; }
 
         public ICollection<Account> Accounts { get; set; }
     }

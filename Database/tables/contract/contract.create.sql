@@ -5,6 +5,7 @@ create table [contract] (
     percent_account_id int not null,
     program_id int not null,
     number int not null,
+    conclusion_date datetime2 not null,
     amount money not null,
 
 	primary key (id),

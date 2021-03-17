@@ -4,6 +4,8 @@ create table account (
     credit money not null,
     number nvarchar(13) not null,
     account_type_id int not null,
+    debt money not null,
+    debt_percents money not null,
 
     primary key (id),
     constraint FK_account_account_type foreign key (account_type_id) references account_type(id),

@@ -51,7 +51,7 @@ namespace BankingSystem.Domain.Entities
 
         public override List<string> Validate()
         {
-            var errors = new List<string>();
+            var errors = base.Validate();
 
             if (string.IsNullOrEmpty(FirstName))
             {

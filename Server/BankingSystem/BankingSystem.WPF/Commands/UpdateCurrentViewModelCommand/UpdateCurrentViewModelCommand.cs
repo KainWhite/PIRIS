@@ -17,7 +17,7 @@ namespace BankingSystem.WPF.Commands.UpdateCurrentViewModelCommand
 
         public bool CanExecute(object parameter)
         {
-            return parameter is UpdateCurrentViewModelCommandParameter;
+            return true;
         }
 
         public void Execute(object parameter)
